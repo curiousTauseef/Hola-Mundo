@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: d1aa502269cec17488ac3f13cea88f14
-timeCreated: 1454912909
+guid: 2464fedc0b16cca49a1cce5bdcd594f6
+timeCreated: 1454981329
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -24,6 +24,11 @@ TextureImporter:
     21300034: School_17
     21300036: School_18
     21300038: School_19
+    21300040: School_20
+    21300042: School_21
+    21300044: School_22
+    21300046: School_23
+    21300048: School_24
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -117,8 +122,8 @@ TextureImporter:
     - name: School_4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 48
+        x: 64
+        y: 64
         width: 16
         height: 16
       alignment: 1
@@ -128,7 +133,7 @@ TextureImporter:
     - name: School_5
       rect:
         serializedVersion: 2
-        x: 16
+        x: 0
         y: 48
         width: 16
         height: 16
@@ -139,7 +144,7 @@ TextureImporter:
     - name: School_6
       rect:
         serializedVersion: 2
-        x: 32
+        x: 16
         y: 48
         width: 16
         height: 16
@@ -150,7 +155,7 @@ TextureImporter:
     - name: School_7
       rect:
         serializedVersion: 2
-        x: 48
+        x: 32
         y: 48
         width: 16
         height: 16
@@ -161,8 +166,8 @@ TextureImporter:
     - name: School_8
       rect:
         serializedVersion: 2
-        x: 0
-        y: 32
+        x: 48
+        y: 48
         width: 16
         height: 16
       alignment: 1
@@ -172,8 +177,8 @@ TextureImporter:
     - name: School_9
       rect:
         serializedVersion: 2
-        x: 16
-        y: 32
+        x: 64
+        y: 48
         width: 16
         height: 16
       alignment: 1
@@ -183,7 +188,7 @@ TextureImporter:
     - name: School_10
       rect:
         serializedVersion: 2
-        x: 32
+        x: 0
         y: 32
         width: 16
         height: 16
@@ -194,7 +199,7 @@ TextureImporter:
     - name: School_11
       rect:
         serializedVersion: 2
-        x: 48
+        x: 16
         y: 32
         width: 16
         height: 16
@@ -205,8 +210,8 @@ TextureImporter:
     - name: School_12
       rect:
         serializedVersion: 2
-        x: 0
-        y: 16
+        x: 32
+        y: 32
         width: 16
         height: 16
       alignment: 1
@@ -216,8 +221,8 @@ TextureImporter:
     - name: School_13
       rect:
         serializedVersion: 2
-        x: 16
-        y: 16
+        x: 48
+        y: 32
         width: 16
         height: 16
       alignment: 1
@@ -227,8 +232,8 @@ TextureImporter:
     - name: School_14
       rect:
         serializedVersion: 2
-        x: 32
-        y: 16
+        x: 64
+        y: 32
         width: 16
         height: 16
       alignment: 1
@@ -238,7 +243,7 @@ TextureImporter:
     - name: School_15
       rect:
         serializedVersion: 2
-        x: 48
+        x: 0
         y: 16
         width: 16
         height: 16
@@ -249,6 +254,50 @@ TextureImporter:
     - name: School_16
       rect:
         serializedVersion: 2
+        x: 16
+        y: 16
+        width: 16
+        height: 16
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: School_17
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 16
+        width: 16
+        height: 16
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: School_18
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 16
+        width: 16
+        height: 16
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: School_19
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 16
+        width: 16
+        height: 16
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: School_20
+      rect:
+        serializedVersion: 2
         x: 0
         y: 0
         width: 16
@@ -257,7 +306,7 @@ TextureImporter:
       pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: School_17
+    - name: School_21
       rect:
         serializedVersion: 2
         x: 16
@@ -268,7 +317,7 @@ TextureImporter:
       pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: School_18
+    - name: School_22
       rect:
         serializedVersion: 2
         x: 32
@@ -279,10 +328,21 @@ TextureImporter:
       pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: School_19
+    - name: School_23
       rect:
         serializedVersion: 2
         x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: School_24
+      rect:
+        serializedVersion: 2
+        x: 64
         y: 0
         width: 16
         height: 16

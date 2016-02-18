@@ -14,12 +14,18 @@ public class UICardScroll : MonoBehaviour
     private int bttnDistance;   // Will hold the distance between the buttons
     private int minButtonNum;   // To hold the number of the button closest to center
     private int bttnLength;
+    private float cardScale = 200.0f;
+    private float cardAngle = 1.0f;
+    private string inputString;
+    private string[] cardWords;
+    private int cardIndex;
 
     void Start()
     {
         bttnLength = bttn.Length;
         distance = new float[bttnLength];
         distReposition = new float[bttnLength];
+        cardWords = new string[bttnLength];
 
         // Get distance between buttons
         bttnDistance = (int)Mathf.Abs(bttn[1].GetComponent<RectTransform>().anchoredPosition.x - bttn[0].GetComponent<RectTransform>().anchoredPosition.x);
@@ -52,35 +58,54 @@ public class UICardScroll : MonoBehaviour
                 rectTransform.anchoredPosition = newAnchoredPos;
             }
 
-            float newScale = Mathf.Lerp(1.0f, 1.0f - distance[i] / 5.0f, Time.deltaTime); //0.16 per frame
+            float newScale = 1.0f - distance[i] / cardScale; // Mathf.Lerp(1.0f, 1.0f - distance[i] / 5.0f, Time.deltaTime); //0.16 per frame
             rectTransform.localScale = new Vector2(newScale, newScale);
 
-            float newAngle = Mathf.Lerp(0.0f, 0.0f - distReposition[i] * 35.0f, Time.deltaTime);
-            rectTransform.rotation = Quaternion.Euler(rectTransform.rotation.x, Mathf.Max(newAngle,-100.0f), 0);
+            float newAngle = 0.0f - distReposition[i] * cardAngle; // Mathf.Lerp(0.0f, 0.0f - distReposition[i] * 35.0f, Time.deltaTime);
+            rectTransform.rotation = Quaternion.Euler(rectTransform.rotation.x, Mathf.Max(newAngle, -100.0f), 0);
 
-            //if(distReposition[i]>=0)
-                bttn[i].transform.SetSiblingIndex( System.Convert.ToInt32(Mathf.Floor(distReposition[i] / -100.0f) ) );
+            //Change depths of card based on their distances
+            bttn[i].transform.SetSiblingIndex(System.Convert.ToInt32(Mathf.Floor(distReposition[i] / -100.0f)));
+            //Correct the depth of Center card
             if (distReposition[i] > -10.0f && distReposition[i] < 10.0f)
                 bttn[i].transform.SetSiblingIndex(100);
-            //else
-            //    bttn[i].transform.SetSiblingIndex(System.Convert.ToInt32(Mathf.Ceil(distReposition[i] / -100.0f)));
-            //MoveInHierarchy(bttn[i], System.Convert.ToInt32(distance[i]/-100.0f));
         }
 
-        float minDistance = Mathf.Min(distance);    // Get the min distance
-
-        for (int a = 0; a < bttn.Length; a++)
+        if(cardIndex==minButtonNum)
         {
-            if (minDistance == distance[a])
+            float minDistance = Mathf.Min(distance);    // Get the min distance
+
+            for (int a = 0; a < bttn.Length; a++)
             {
-                minButtonNum = a;
+                if (minDistance == distance[a])
+                {
+                    minButtonNum = a;
+                }
             }
         }
 
         if (!dragging)
         {
-            LerpToButton(-bttn[minButtonNum].GetComponent<RectTransform>().anchoredPosition.x);
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                cardIndex = 3;
+            }
+
+            LerpToButton(-bttn[cardIndex].GetComponent<RectTransform>().anchoredPosition.x);
         }
+        else
+        {
+            cardIndex = minButtonNum;
+        }
+
+        //Search the cards
+        if (Input.anyKeyDown)
+        {
+            //inputString = Input.inputString;
+            //int cardIndexFound = SearchCards(inputString);
+            //LerpToButton(cardIndexFound);
+        }
+
     }
 
     void LerpToButton(float position)
@@ -106,4 +131,15 @@ public class UICardScroll : MonoBehaviour
         b.transform.SetSiblingIndex(index + delta);
     }
 
+    private int SearchCards(string i_string)
+    {
+        for(int i = 0; i<cardWords.Length; i++)
+        {
+            if(cardWords[i].StartsWith(i_string))
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
 }

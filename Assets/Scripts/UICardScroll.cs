@@ -7,6 +7,8 @@ public class UICardScroll : MonoBehaviour
     public RectTransform panel; // To hold the ScrollPanel
     public Button[] bttn;
     public RectTransform center; // Center to compare the distance for each button
+    public Image searchBar;
+    public Text searchText;
 
     public float[] distance;    // All buttons' distance to the center
     public float[] distReposition;
@@ -17,6 +19,7 @@ public class UICardScroll : MonoBehaviour
     private float cardScale = 200.0f;
     private float cardAngle = 1.0f;
     private string inputString;
+    private string searchString = "";
     private string[] cardWords;
     private int cardIndex;
 
@@ -29,6 +32,12 @@ public class UICardScroll : MonoBehaviour
 
         // Get distance between buttons
         bttnDistance = (int)Mathf.Abs(bttn[1].GetComponent<RectTransform>().anchoredPosition.x - bttn[0].GetComponent<RectTransform>().anchoredPosition.x);
+
+        for (int i = 0; i<cardWords.Length; i++)
+        {
+            cardWords[i] = bttn[i].GetComponentInChildren<Text>().text;
+            //Debug.Log(bttn[i].GetComponentInChildren<Text>().text);
+        }
     }
 
     void Update()
@@ -71,7 +80,7 @@ public class UICardScroll : MonoBehaviour
                 bttn[i].transform.SetSiblingIndex(100);
         }
 
-        if(cardIndex==minButtonNum)
+        if(cardIndex == minButtonNum)
         {
             float minDistance = Mathf.Min(distance);    // Get the min distance
 
@@ -86,10 +95,36 @@ public class UICardScroll : MonoBehaviour
 
         if (!dragging)
         {
-            if (Input.GetKeyDown(KeyCode.A))
+
+            //Search the cards
+
+            if (Input.GetKeyDown(KeyCode.Backspace))
             {
-                cardIndex = 3;
+                if (searchString.Length != 0)
+                {
+                    searchString = searchString.Remove(searchString.Length - 1);
+                }
             }
+            else if (Input.anyKeyDown)
+            {
+                inputString = Input.inputString;
+
+                if(inputString != "")
+                {
+                    searchString += inputString;
+
+                    if (SearchCards(searchString) != -1)
+                    {
+                        cardIndex = SearchCards(searchString);
+                    }
+                }
+            }
+
+            Vector2 tempScale = searchBar.GetComponent<RectTransform>().sizeDelta;
+            tempScale.x = 3.0f + 0.65f * searchString.Length;
+            searchBar.GetComponent<RectTransform>().sizeDelta = tempScale;
+
+            searchText.text = searchString;
 
             LerpToButton(-bttn[cardIndex].GetComponent<RectTransform>().anchoredPosition.x);
         }
@@ -98,13 +133,6 @@ public class UICardScroll : MonoBehaviour
             cardIndex = minButtonNum;
         }
 
-        //Search the cards
-        if (Input.anyKeyDown)
-        {
-            //inputString = Input.inputString;
-            //int cardIndexFound = SearchCards(inputString);
-            //LerpToButton(cardIndexFound);
-        }
 
     }
 

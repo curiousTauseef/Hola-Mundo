@@ -9,6 +9,7 @@ public class UICardScroll : MonoBehaviour
     public RectTransform center; // Center to compare the distance for each button
     public Image searchBar;
     public Text searchText;
+    public Sprite cardAddSprite;
 
     public float[] distance;    // All buttons' distance to the center
     public float[] distReposition;
@@ -22,6 +23,7 @@ public class UICardScroll : MonoBehaviour
     private string searchString = "";
     private string[] cardWords;
     private int cardIndex;
+    private Coroutine waitForSearchReset;
 
     void Start()
     {
@@ -84,11 +86,11 @@ public class UICardScroll : MonoBehaviour
         {
             float minDistance = Mathf.Min(distance);    // Get the min distance
 
-            for (int a = 0; a < bttn.Length; a++)
+            for (int i = 0; i < bttn.Length; i++)
             {
-                if (minDistance == distance[a])
+                if (minDistance == distance[i])
                 {
-                    minButtonNum = a;
+                    minButtonNum = i;
                 }
             }
         }
@@ -118,10 +120,13 @@ public class UICardScroll : MonoBehaviour
                         cardIndex = SearchCards(searchString);
                     }
                 }
+
+                //Reset the Search Bar
+                waitForSearchReset = StartCoroutine(ClearSearchString());
             }
 
             Vector2 tempScale = searchBar.GetComponent<RectTransform>().sizeDelta;
-            tempScale.x = 3.0f + 0.65f * searchString.Length;
+            tempScale.x = 1.5f + 0.325f * searchString.Length;
             searchBar.GetComponent<RectTransform>().sizeDelta = tempScale;
 
             searchText.text = searchString;
@@ -133,7 +138,12 @@ public class UICardScroll : MonoBehaviour
             cardIndex = minButtonNum;
         }
 
-
+        //Activate AddCard UI for the middle card
+        for (int i = 0; i < bttn.Length; i++)
+        {
+            bttn[i].GetComponentsInChildren<Image>()[1].color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
+        }
+        bttn[cardIndex].GetComponentsInChildren<Image>()[1].color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
     }
 
     void LerpToButton(float position)
@@ -169,5 +179,27 @@ public class UICardScroll : MonoBehaviour
             }
         }
         return -1;
+    }
+
+    IEnumerator ClearSearchString()
+    {
+        if(waitForSearchReset != null)
+        {
+            StopCoroutine(waitForSearchReset);
+        }
+
+        yield return new WaitForSeconds(0.5f);
+        searchString = "";
+        //Debug.Log("Waiting finished");
+    }
+
+    public void AddCardAddUI()
+    {
+        //bttn[minButtonNum].GetComponentsInChildren<Image>()[1].color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+        //if ()
+        {
+            //bttn[minButtonNum].GetComponentInChildren<Image>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+            //Debug.Log("Hover");
+        }
     }
 }

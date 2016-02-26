@@ -99,7 +99,6 @@ public class UICardScroll : MonoBehaviour
         {
 
             //Search the cards
-
             if (Input.GetKeyDown(KeyCode.Backspace))
             {
                 if (searchString.Length != 0)
@@ -193,13 +192,4 @@ public class UICardScroll : MonoBehaviour
         //Debug.Log("Waiting finished");
     }
 
-    public void AddCardAddUI()
-    {
-        //bttn[minButtonNum].GetComponentsInChildren<Image>()[1].color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-        //if ()
-        {
-            //bttn[minButtonNum].GetComponentInChildren<Image>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-            //Debug.Log("Hover");
-        }
-    }
 }
